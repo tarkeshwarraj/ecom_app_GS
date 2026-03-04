@@ -1,6 +1,15 @@
+import { SafeAreaView } from "react-native-safe-area-context";
 import "../global.css";
 import { Stack } from "expo-router";
 
 export default function RootLayout() {
-  return <Stack />;
+  return(
+    <SafeAreaView style={{ flex: 1 }}>
+  <Stack
+    screenOptions={{
+      headerShown: false,
+    }}
+    />
+    </SafeAreaView>
+  )
 }
