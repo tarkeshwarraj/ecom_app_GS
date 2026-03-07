@@ -3,13 +3,13 @@ import "../global.css";
 import { Stack } from "expo-router";
 
 export default function RootLayout() {
-  return(
-    <SafeAreaView style={{ flex: 1 }}>
-  <Stack
-    screenOptions={{
-      headerShown: false,
-    }}
-    />
+  return (
+    <SafeAreaView className='flex-1' edges={['top']}>
+      <Stack
+        screenOptions={{
+          headerShown: false,
+        }}
+      />
     </SafeAreaView>
-  )
+  );
 }
