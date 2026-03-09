@@ -1,13 +1,17 @@
 import { View, Text, TouchableOpacity,StyleSheet} from "react-native";
-import React from "react";
+import React, { use } from "react";
 import { ProductCardProps } from "@/constants/types";
 import { Link } from "expo-router";
 import { Image } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { COLORS } from "@/constants";
+import { useWishlist } from "@/context/WishlistContext";
 
 export default function ProductCard({ product }: ProductCardProps) {
-  const isLiked = false; // This should be dynamic based on user preferences or state
+
+  const {isInWishlist, toggleWishlist} = useWishlist();
+  const isLiked = isInWishlist(product._id); // This should be dynamic based on user preferences or state
+  
   return (
     <Link href={`/product/${product._id}`} asChild>
       <TouchableOpacity className="w-[46%] bg-white rounded-lg p-4 mr-4 mb-4 overflow-hidden">
@@ -26,6 +30,7 @@ export default function ProductCard({ product }: ProductCardProps) {
             className="absolute top-2 right-2 z-10 p-2 bg-white rounded-full shadow-sm"
             onPress={(e) => {
               e.stopPropagation();
+              toggleWishlist(product);
             }}
           >
             <Ionicons
@@ -47,7 +52,7 @@ export default function ProductCard({ product }: ProductCardProps) {
           <View style={styles.option}>
             <Ionicons name='star' size={14} color='#FFD700' />
             <Text className="text-secondary text-xs ml-1" >4.6</Text>
-            <Text className="text-primary font-medium text-[5px] mb-1">{product.name}</Text>
+            <Text className="text-primary font-medium text-sm mb-1 ml-2">{product.name}</Text>
           </View>
           <View className="flex-row items-center">
             <Text className="text-primary font-bold text-base">${product.price.toFixed(2)}</Text>
@@ -62,7 +67,7 @@ export default function ProductCard({ product }: ProductCardProps) {
 const styles = StyleSheet.create(
   {
     card:{
-      padding: 10,
+      padding:5
     },
     option:{
       flexDirection:'row',
