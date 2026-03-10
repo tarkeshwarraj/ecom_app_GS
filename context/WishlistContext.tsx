@@ -1,6 +1,6 @@
 import { Product, WishlistContextType } from '@/constants/types';
 import { createContext, ReactNode, useContext, useState, useEffect } from 'react';
-import { dummyWishlist } from '@/constants/dummyData';
+import { dummyWishlist } from '@/assets/assets';
 
 
 const WishlistContext = createContext<WishlistContextType | undefined>(undefined)
@@ -20,8 +20,8 @@ export const WishlistProvider = ({ children }: { children: ReactNode }) => {
 
     // In a real application, this would involve an API call to add/remove the product from the user's wishlist on the server. For this example, we'll just update the local state.
     const toggleWishlist = async (product: Product) => {
-        const exists = wishlist.find((p) => p._id === product._id);
         setWishlist((prev) => {
+            const exists = prev.find((p) => p._id === product._id);
             if (exists) {
                 return prev.filter((p) => p._id !== product._id);
             }
