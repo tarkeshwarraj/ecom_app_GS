@@ -31,13 +31,16 @@ export default function ProductDetails() {
   const [activeImageIndex, setActiveImageIndex] = React.useState(0);
 
   const fetchProduct = async () => {
-    setProduct(dummyProducts.find((product) => product._id === id) as any);
+    const foundProduct = dummyProducts.find((p) => p._id === id);
+    if (foundProduct) {
+      setProduct(foundProduct);
+    }
     setLoading(false);
   };
 
   React.useEffect(() => {
     fetchProduct();
-  }, []);
+  }, [id]);
 
   if (loading) {
     return (
