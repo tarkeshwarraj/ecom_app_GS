@@ -3,8 +3,11 @@ import React from "react";
 import { Tabs } from "expo-router";
 import { Feather ,Ionicons } from "@expo/vector-icons";
 import { COLORS } from '@/constants'
+import {useCart} from '@/context/CartContext.tsx'
 
 const TabLayout = () => {
+
+  const {cartItems} = useCart();
   return (
     <Tabs screenOptions={{
         headerShown: false,
@@ -38,13 +41,16 @@ const TabLayout = () => {
         name="cart"
         options={{
           title: "Cart",
-          tabBarIcon: ({ color, focused }) => (
-            <Ionicons
-              name={focused ? "cart" : "cart-outline"}
-              size={26}
-              color={color}
-            />
-          ),
+          tabBarIcon: ({ color, focused }) => {
+            <View className="relative">
+            
+            <Feather name={focused ? 'shopping-cart' : 'shopping-cart-outline'} size={26} color={color}/>
+              {cartItems.length > 0 &&
+              <View>
+                <Ionicons name='ellipse' size={8} color="white" />
+              </View>}
+            </View>
+          }
         }}
       />
 

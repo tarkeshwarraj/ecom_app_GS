@@ -14,7 +14,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import Header from "@/components/Header";
 import { Ionicons } from "@expo/vector-icons";
 import { COLORS } from "@/constants";
-import { FlatList } from "react-native-gesture-handler";
+
 import ProductCard from "@/components/ProductCard";
 export default function Shop() {
   const [products, setProducts] = useState<Product[]>([]);
@@ -117,7 +117,6 @@ export default function Shop() {
                             No Products found
                         </Text>
                     </View>
-
                 )
             }
         />
